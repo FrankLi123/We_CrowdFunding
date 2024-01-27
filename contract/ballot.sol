@@ -8,14 +8,15 @@ contract Campaign {
         uint value;
         address recipient;
         bool complete;
+        uint approvalCount;
+        mapping(address => bool) approvals; // list of who has voted on this reqquest
     }
 
     // Storage Variable(s);
     address public manager;
     uint public minimumContribution;
-    Request[] public requests;
-
-    mapping(address => bool) public approvers;
+    Request[] public requests;        // list of requests that the manager has created
+    mapping(address => bool) public approvers; // list of addresses for every person who has donated money
 
     // Modifier that adds to other functions for restriction on functions inside this contract
     modifier restricted() {
@@ -41,7 +42,7 @@ contract Campaign {
 
     /* Manager creates a new request that requires donation */
     function createRequest(uint val, string description, address recipient) public restricted{
-        
+
         require(approvers[msg.sender])
         // variable in Memory(not storage)
         Request memory req = Request({
