@@ -4,24 +4,18 @@ contract Campaign {
 
     // Struct - Manager's Request
     struct Request{
-
         string description;
-
         uint value;
-
         address recipient;
-
         bool complete;
     }
 
+    // Storage Variable(s);
     address public manager;
-
     uint public minimumContribution;
-
-    address[] public approvers;
-
     Request[] public requests;
 
+    mapping(address => bool) public approvers;
 
     // Modifier that adds to other functions for restriction on functions inside this contract
     modifier restricted() {
@@ -39,21 +33,32 @@ contract Campaign {
 
     /* Allow donator to contribute to manager's request. */
     function contribute() public payable{
-
         require(msg.value > minimumContribution);
-
-        approvers.push(msg.sender);
+        // approvers.push(msg.sender);
+        approvers[msg.sender] = true;
     }
 
 
-    /* manager creates a new request that requires donation */
+    /* Manager creates a new request that requires donation */
     function createRequest(uint val, string description, address recipient) public restricted{
-        Request req = new Request({
+        
+        require(approvers[msg.sender])
+        // variable in Memory(not storage)
+        Request memory req = Request({
             description: description,
             value: val,
             recipient: recipient,
             complete: false,
         });
+        requests.push(req);
     }
+
+
+
+
+
+
+
+
 
 }
