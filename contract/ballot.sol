@@ -2,7 +2,7 @@ pragma solidity ^0.4.17;
 
 contract Campaign {
 
-    // Struct of Manager's Request for Donation
+    // Struct - Manager's Request
     struct Request{
 
         string description;
@@ -20,6 +20,14 @@ contract Campaign {
 
     address[] public approvers;
 
+    Request[] public requests;
+
+
+    // Modifier that adds to other functions for restriction on functions inside this contract
+    modifier restricted() {
+        require( msg.sender == manager);
+        _;
+    }
 
     function Campaign(uint minimum) public {
 
