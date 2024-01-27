@@ -46,4 +46,14 @@ contract Campaign {
     }
 
 
+    /* manager creates a new request that requires donation */
+    function createRequest(uint val, string description, address recipient) public restricted{
+        Request req = new Request({
+            description: description,
+            value: val,
+            recipient: recipient,
+            complete: false,
+        });
+    }
+
 }
