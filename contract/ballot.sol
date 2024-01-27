@@ -32,7 +32,7 @@ contract Campaign {
     }
 
 
-    /* Allow donator to contribute to manager's request. */
+    /* Allow a donator to contribute to manager's request. */
     function contribute() public payable{
         require(msg.value > minimumContribution);
         // approvers.push(msg.sender);
@@ -43,17 +43,31 @@ contract Campaign {
     /* Manager creates a new request that requires donation */
     function createRequest(uint val, string description, address recipient) public restricted{
 
-        require(approvers[msg.sender])
+        require(approvers[msg.sender]);
+        
         // variable in Memory(not storage)
         Request memory req = Request({
             description: description,
             value: val,
             recipient: recipient,
             complete: false,
+            approvalCount: 0
         });
+
         requests.push(req);
     }
 
+    /* Let a donator approves one request from the manager */
+    function approveRequest(uint index) public{
+
+        Request storage request = requests[index];
+
+        require(approvers[msg.sender]);
+        require(!request.approvals[msg.sender]);
+
+        request.approvals[msg.sender] = true;  // mark the 
+        request.approvalCount++;
+    }
 
 
 
