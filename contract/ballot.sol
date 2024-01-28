@@ -26,11 +26,9 @@ contract Campaign {
         _;
     }
 
-    function Campaign(uint minimum) public {
-
-        manager = msg.sender;
+    function Campaign(uint minimum, address creator) public {
+        manager = creator;
         minimumContribution = minimum;
-
     }
 
 
