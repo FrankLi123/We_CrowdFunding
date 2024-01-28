@@ -13,5 +13,4 @@ contract CampaignFactory {
     function getDeployedCampaigns() public view returns (address[]){
         return deployedCampaigns;
     }
-
 }
