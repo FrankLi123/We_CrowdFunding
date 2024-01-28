@@ -17,6 +17,8 @@ contract Campaign {
     uint public minimumContribution;
     Request[] public requests;        // list of requests that the manager has created
     mapping(address => bool) public approvers; // list of addresses for every person who has donated money
+    uint public approversCount;
+
 
     // Modifier that adds to other functions for restriction on functions inside this contract
     modifier restricted() {
@@ -37,6 +39,7 @@ contract Campaign {
         require(msg.value > minimumContribution);
         // approvers.push(msg.sender);
         approvers[msg.sender] = true;
+        approversCount++;
     }
 
 
@@ -60,7 +63,7 @@ contract Campaign {
     /* Let a donator approves one request from the manager */
     function approveRequest(uint index) public{
 
-        Request storage request = requests[index];
+        Request storage request = requests[index]; // aim to make change to storage rather than memory
 
         require(approvers[msg.sender]);
         require(!request.approvals[msg.sender]);
@@ -71,9 +74,23 @@ contract Campaign {
 
 
 
+    /* finalize a request once the approvalCount passes a threshold */
+    function finalizeRequest(uint index) public restricted {
+    
+        Request storage request = requests[index]; //looking for the copy request in storage
 
 
+        // verify if the number of approvals on this request is over half.
+        require(request.approvalCount > (approversCount / 2));
 
+        require(!request.complete);
+
+        // transfer the donation to the recipient
+        request.recipient.transfer(request.value);
+
+        complete.complete = true;
+        
+    }
 
 
 }
