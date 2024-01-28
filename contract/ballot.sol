@@ -66,31 +66,27 @@ contract Campaign {
         Request storage request = requests[index]; // aim to make change to storage rather than memory
 
         require(approvers[msg.sender]);
+        
         require(!request.approvals[msg.sender]);
 
         request.approvals[msg.sender] = true;  // mark the 
+        
         request.approvalCount++;
     }
-
 
 
     /* finalize a request once the approvalCount passes a threshold */
     function finalizeRequest(uint index) public restricted {
     
         Request storage request = requests[index]; //looking for the copy request in storage
-
-
         // verify if the number of approvals on this request is over half.
         require(request.approvalCount > (approversCount / 2));
-
+        
         require(!request.complete);
-
         // transfer the donation to the recipient
         request.recipient.transfer(request.value);
-
-        complete.complete = true;
         
+        request.complete = true;
     }
-
 
 }
