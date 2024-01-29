@@ -64,9 +64,23 @@ describe('Campaigns', () => {
             value: '200',
             from: accounts[1]
         });
-
         const isContributor = await campaign.methods.approvers(accounts[1]).call();
         assert(isContributor);
+    });
+
+
+    it('check minimum limit on Donation', async ()=>{
+
+        try{
+            await campaign.methods.contribute().send({
+
+                value: '5',
+                from: accounts[1]
+            });
+        }catch(err){
+            assert(err)
+        }
+
     });
 
 });
