@@ -31,7 +31,7 @@ fs.ensureDirSync(buildPath);
 for (let contract in campaignOutput) {
     // console.log("Campaign Contract:", contract);
     fs.outputJsonSync(
-        path.resolve(buildPath, contract + '.json'),
+        path.resolve(buildPath, contract.replace(':', '') + '.json'),
         campaignOutput[contract]
     );
 }
