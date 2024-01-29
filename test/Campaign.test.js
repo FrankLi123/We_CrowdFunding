@@ -38,13 +38,33 @@ beforeEach( async() => {
 
 });
 
-
 describe('Campaigns', () => {
 
+    // Check - deploy 2 contracts
     it('deploys a factory and a campaign', () => {
-
+        
         assert.ok(factory.options.address);
         assert.ok(campaign.options.address);
 
     });
-})
+
+    // Check - whoever starts a campaign should be the manager
+    if('has caller as the campaign manager', async ()=>{
+
+        // b/c marked manager as 'public' , can have access to it
+        const manager = await campaign.methods.manager().call();
+        
+        assert.equal(accounts[0], manager);
+
+    });
+
+    
+    it('enable donation and let them become approvers', async()=>{
+        await campaign.methods.contribute().send({
+            value: '200',
+            from: accounts[1]
+        });
+    });
+    
+});
+
