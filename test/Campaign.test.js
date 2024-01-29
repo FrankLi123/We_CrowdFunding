@@ -23,9 +23,18 @@ beforeEach( async() => {
     .send({from: accounts[0], gas: '1000000'});
 
 
+    //  call createCampaign() to create a instance of the contract
     await factory.methods.createCampaign('100').send({
         from: accounts[0],
         gas: '1000000'
     });
+
+
+   [campaignAddress] = await factory.methods.geDeployedCampaigns().call();
+
+   campaign = await new web3.eth.Contract(
+        JSON.parse(compiledCampaign.interface),
+        campaignAddress
+   );
 
 });
