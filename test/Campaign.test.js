@@ -64,7 +64,10 @@ describe('Campaigns', () => {
             value: '200',
             from: accounts[1]
         });
+
+        const isContributor = await campaign.methods.approvers(accounts[1]).call();
+        assert(isContributor);
     });
-    
+
 });
 
