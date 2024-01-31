@@ -60,7 +60,7 @@ contract Campaign {
     /* Manager creates a new request that requires donation */
     function createRequest(uint val, string description, address recipient) public restricted{
 
-        require(approvers[msg.sender]);
+        // require(approvers[msg.sender]);
         
         // variable in Memory(not storage)
         Request memory req = Request({
