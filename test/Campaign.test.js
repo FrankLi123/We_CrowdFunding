@@ -121,5 +121,43 @@ describe('Campaigns', () => {
         console.log(balance);
         assert(balance > 103);
     });
+
+
+    it('failed to process a request due to not enough approvals', async ()=>{
+
+        try{
+        await campaign.methods.contribute().send({
+            from: accounts[0],
+            value: web3.utils.toWei('10', 'ether')
+        })
+
+        await campaign.methods.contribute().send({
+            from: accounts[1],
+            value: web3.utils.toWei('15', 'ether')
+        })
+
+        await campaign.methods.createRequest(web3.utils.toWei('5', 'ether'), 'A', accounts[1]).send({ from: accounts[0], gas: '1000000'});
+
+        await campaign.methods.approveRequest(0).send({
+            from: accounts[0],
+            gas: '1000000'
+        });
+
+        // await campaign.methods.approveRequest(0).send({
+        //     from: accounts[1],
+        //     gas: '1000000'
+        // });
+        
+        await campaign.methods.finalizeRequest(0).send({
+            from: accounts[0],
+            gas: '1000000'
+        });
+        } catch(err){
+            assert(err)
+        }
+
+    })
+
+
 });
 
