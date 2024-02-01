@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import factory from '../ethereum/factory';
 
 
-class CampaignIndex extends Compoenent {
+class CampaignIndex extends Component {
     
 
     // get all created campaigns from the deployed contract
