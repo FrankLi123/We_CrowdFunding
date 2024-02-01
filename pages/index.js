@@ -14,7 +14,7 @@ class CampaignIndex extends Component {
     }
 
     render(){
-        return <div> {this.props.campaigns } </div>;
+        return <div> {this.props.campaigns[0] } </div>;
     }
 }
 
