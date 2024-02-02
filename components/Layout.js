@@ -1,4 +1,6 @@
 import React from "react";
+import Header from './Header';
+
 
 export default (props)=>{
 
@@ -6,7 +8,10 @@ export default (props)=>{
 
         <div>
 
-            <h1> here is the header</h1>
+
+            {/* <h1> here is the header</h1> */}
+
+            <Header/>
 
             {props.children}
 
