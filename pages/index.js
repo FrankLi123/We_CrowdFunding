@@ -13,6 +13,11 @@ export default function Home({ campaigns }) {
    
     return (
       <div>
+          <link
+            async
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css"
+        />
         <Card.Group items={items} />
       </div>
     );
@@ -20,7 +25,6 @@ export default function Home({ campaigns }) {
    
   export async function getServerSideProps() {
     const campaigns = await factory.methods.getDeployedCampaigns().call();
-   
     return { props: { campaigns } };
   }
   
