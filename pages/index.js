@@ -24,7 +24,7 @@ export default function Home({ campaigns }) {
         />
         <h3> Open Campaigns</h3>
         <Card.Group items={items} />
-        <Button content="Create Campaign" icon="add circle" primary/>
+        <Button floated="right" content="Create Campaign" icon="add circle" primary/>
       </div>
       </Layout>
     );
