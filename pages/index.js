@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import factory from '../ethereum/factory';
+import { Card } from 'semantic-ui-react';
 
-
-class CampaignIndex extends Component {
-    
-    //assigned to the class itself
-    static async getInitialProps(){
-
-         // get all created campaigns from the deployed contract
-        const campaigns = await factory.methods.getDeployedCampaigns().call();
-        console.log(campaigns);
-        return {campaigns};
-    }
-
-    render(){
-        return <div> {this.props.campaigns[0] } </div>;
-    }
-}
-
-export default CampaignIndex;
+export default function Home({ campaigns }) {
+    const items = campaigns.map((item) => {
+      return {
+        header: item,
+        description: <a>View Campaign</a>,
+        fluid: true,
+      };
+    });
+   
+    return (
+      <div>
+        <Card.Group items={items} />
+      </div>
+    );
+  }
+   
+  export async function getServerSideProps() {
+    const campaigns = await factory.methods.getDeployedCampaigns().call();
+   
+    return { props: { campaigns } };
+  }
+  
