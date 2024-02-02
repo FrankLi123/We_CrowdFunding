@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import factory from '../ethereum/factory';
-import { Card } from 'semantic-ui-react';
+import { Card, Button} from 'semantic-ui-react';
 
 export default function Home({ campaigns }) {
     const items = campaigns.map((item) => {
@@ -19,6 +19,7 @@ export default function Home({ campaigns }) {
             href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css"
         />
         <Card.Group items={items} />
+        <Button content="Create Campaign" icon="add circle" primary/>
       </div>
     );
   }
