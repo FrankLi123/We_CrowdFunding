@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import factory from '../ethereum/factory';
 import { Card, Button} from 'semantic-ui-react';
 import Layout from '../components/Layout';
-
+import {Link} from '../routes';
 
 export default function Home({ campaigns }) {
     const items = campaigns.map((item) => {
@@ -19,7 +19,12 @@ export default function Home({ campaigns }) {
       <div>
         <h3> Open Campaigns</h3>
        
-        <Button floated="right" content="Create Campaign" icon="add circle" primary/>
+        <Link route="/campaigns/new">
+            {/* enable traditional right click functionality  */}
+            <a>
+                <Button floated="right" content="Create Campaign" icon="add circle" primary/>
+            </a>
+        </Link>
         <Card.Group items={items} />
       </div>
       </Layout>
