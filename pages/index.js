@@ -5,10 +5,14 @@ import Layout from '../components/Layout';
 import {Link} from '../routes';
 
 export default function Home({ campaigns }) {
-    const items = campaigns.map((item) => {
+    const items = campaigns.map((address) => {
       return {
-        header: item,
-        description: <a>View Campaign</a>,
+        header: address,
+        description: (
+        <Link route={`/campaigns/${address}`}>
+            <a>View Campaign</a>
+        </Link>
+        ),
         fluid: true,
       };
     });
@@ -20,7 +24,7 @@ export default function Home({ campaigns }) {
         <h3> Open Campaigns</h3>
        
         <Link route="/campaigns/new">
-            {/* enable traditional right click functionality  */}
+            {/* the <a> tag enable the traditional right click functionality  */}
             <a>
                 <Button floated="right" content="Create Campaign" icon="add circle" primary/>
             </a>
