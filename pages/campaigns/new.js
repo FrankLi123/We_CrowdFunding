@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import Layout from "../../components/Layout";
-import { Card, Button, Form, Input} from 'semantic-ui-react';
+import { Card, Button, Form, Input, Message} from 'semantic-ui-react';
 import factory from '../../ethereum/factory';
 import web3 from "../../ethereum/web3";
 
@@ -24,7 +24,7 @@ class CampaignNew extends Component {
         }catch(err){
             this.setState({errorMessage: err.message});
         }
-        
+
     };
 
     render(){
@@ -32,7 +32,7 @@ class CampaignNew extends Component {
             <Layout>
                 <h3> Create a New Campaign</h3>
 
-                <Form onSubmit={this.onSubmit}>
+                <Form onSubmit={this.onSubmit} error={this.state.errorMessage}>
                 <Form.Field>
                     <label> Minimum Contribution</label>
                     <Input label="wei" labelPosition="right"
@@ -40,8 +40,12 @@ class CampaignNew extends Component {
                     onChange={event => this.setState({minimumContribution: event.target.value})}
                     />
                 </Form.Field>
+                <Message error header="Opps" content={this.state.errorMessage} />
+                <Button primary> Create </Button>
                 </Form>
-                <Button primary> Create: </Button>
+            
+               
+
             </Layout>
         )
     }
