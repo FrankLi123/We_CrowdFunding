@@ -7,7 +7,7 @@ const buildPath = path.resolve(__dirname, 'build');
 fs.removeSync(buildPath);
 
 // Read contract .sol files
-const campaignPath = path.resolve(__dirname, 'contracts', 'ballot.sol');
+const campaignPath = path.resolve(__dirname, 'contracts', 'campaign.sol');
 // const factoryPath = path.resolve(__dirname, 'contracts', 'factory.sol');
 
 const campaignSource = fs.readFileSync(campaignPath, 'utf8');
