@@ -102,4 +102,15 @@ contract Campaign {
         request.complete = true;
     }
 
+
+    /* return a summary of different statstics about this campaign */
+    function getSummary() public view returns (uint, uint, uint, uint, address ){
+        return (
+            minimumContribution,
+            this.balance,
+            requests.length,
+            approversCount,
+            manager
+        );
+    }
 }
