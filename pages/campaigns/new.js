@@ -21,11 +21,12 @@ class CampaignNew extends Component {
         });
     }
 
-
     render(){
         return (
             <Layout>
                 <h3> Create a New Campaign</h3>
+
+                <Form onSubmit={this.onSubmit}>
                 <Form.Field>
                     <label> Minimum Contribution</label>
                     <Input label="wei" labelPosition="right"
@@ -33,6 +34,7 @@ class CampaignNew extends Component {
                     onChange={event => this.setState({minimumContribution: event.target.value})}
                     />
                 </Form.Field>
+                </Form>
                 <Button primary> Create: </Button>
             </Layout>
         )
