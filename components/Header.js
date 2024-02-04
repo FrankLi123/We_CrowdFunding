@@ -1,25 +1,34 @@
 import React from "react";
-
 import {Menu} from 'semantic-ui-react';
+import {Link} from "../routes";
 
 export default ()=>{
 
     return(
 
         <Menu style={{marginTop: '15px'}}>
-            <Menu.Item>
+        
+        {/* generic wrapper component */}
+            <Link route="/"> 
+                <a className="item">
                 CrowdCoin
-            </Menu.Item>
+                </a>
+            </Link>
 
                 <Menu.Menu position="right">
             
-                    <Menu.Item>
-                    Campaigns
-                    </Menu.Item>
+                <Link route="/"> 
+                    <a className="item">
+                    Campaign
+                    </a>
+                </Link>
+                   
+                <Link route="/campaigns/new"> 
+                    <a className="item">
+                    +
+                    </a>
+                </Link>
 
-                    <Menu.Item>
-                        +
-                    </Menu.Item>
                 </Menu.Menu>
         </Menu>
     )
