@@ -15,11 +15,13 @@ class CampaignNew extends Component {
         event.preventDefault();
         
         const accounts = await web3.eth.getAccounts();
+        
+        console.log("!")
 
-        await factory.methods.createCampaign().send({
+        await factory.methods.createCampaign(this.state.minimumContribution).send({
             from: accounts[0]
         });
-    }
+    };
 
     render(){
         return (
