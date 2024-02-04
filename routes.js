@@ -2,6 +2,7 @@
 
 const routes = require("next-routes")();
 
-// routes.add('...','...');
+//define a new route mapping with wildcard ':'
+routes.add('/campaigns/:address', '/campaigns/show' );
 
 module.exports = routes;
