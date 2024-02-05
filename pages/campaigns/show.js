@@ -35,12 +35,29 @@ class CampaignShow extends Component {
             approversCount
         } = this.props;
 
+        // list for displaying each Card
         const items = [
             {
                 header : manager,
                 meta: "Address of Manager",
                 description: 'Manager created this campaign and can create request to withdraw money',
                 style: {overflowWrap: 'break-word'}
+
+            },{
+
+                header: minimumContribution,
+                meta:"Minimum Contribution (wei)",
+                description:'The least amount of wei to contriute in order to be an approver'
+            },
+            {
+                header: requestCount,
+                meta: 'Number of Requests',
+                description: 'A request aims to get some money from contract, and such operations must be approved by approvers'
+            },
+            { // approversCount
+                header: approversCount,
+                meta : 'Number of Approvers',
+                description: 'donater number that have already made the donation'
 
             }
         ];
