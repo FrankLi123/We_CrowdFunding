@@ -30,6 +30,7 @@ class CampaignShow extends Component {
 
     renderCardLists(){
         const {
+            address,
             balance,
             manager,
             minimumContribution,
