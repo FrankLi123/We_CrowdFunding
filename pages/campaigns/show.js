@@ -18,7 +18,7 @@ class CampaignShow extends Component {
         console.log(summary);
         
         return {
-
+            address : props.query.address,
             minimumContribution: BigInt(summary[0]).toString(),
             balance: BigInt(summary[1]).toString(),
             requestCount: BigInt(summary[2]).toString(),
@@ -79,7 +79,7 @@ class CampaignShow extends Component {
                 </Grid.Column>
 
                 <Grid.Column width={6}>
-                <ContributeForm/>
+                <ContributeForm address={this.props.address} />
                 </Grid.Column>
                 </Grid>
             </Layout>
