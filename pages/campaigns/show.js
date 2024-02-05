@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 import Layout from '../../components/Layout';
-
+import Campaign from '../../ethereum/campaign';
 
 class CampaignShow extends Component {
 
     //before compoenent rendered to the screen, run this
-    static async getServerSideProps(props){
-        // show one campaign address in this page
-        console.log(props.query.address);
+    static async getInitialProps(props){
+
+        const campaign = Campaign(props.query.address);
+
+        const summary = await campaign.methods.getSummary().call();
+        
+        console.log(summary);
+        
         
         return {};
     }
