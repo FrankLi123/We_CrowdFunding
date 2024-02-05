@@ -6,6 +6,12 @@ import {Link} from '../../../routes';
 import { Card, Button} from 'semantic-ui-react';
 
 class RequestIndex extends Component {
+
+    static async getInitialProps(props){
+        const {address} = props.query;
+        
+        return {address};
+    }
     render(){
         return(
             <Layout>
