@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Layout from '../../components/Layout';
 import Campaign from '../../ethereum/campaign';
 import { Card, Button, Form, Input, Message} from 'semantic-ui-react';
-
+import web3 from '../../ethereum/web3';
 class CampaignShow extends Component {
 
     //before compoenent rendered to the screen, run this
@@ -59,6 +59,10 @@ class CampaignShow extends Component {
                 meta : 'Number of Approvers',
                 description: 'donater number that have already made the donation'
 
+            },{
+                header: web3.utils.fromWei(balance, 'ether'),
+                meta: 'Balance of Campaign (ether)',
+                description: 'The amount of money this campaign have currently'
             }
         ];
         return  <Card.Group items={items}/>;
