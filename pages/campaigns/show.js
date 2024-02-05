@@ -17,11 +17,11 @@ class CampaignShow extends Component {
         
         return {
 
-            minimumContribution: summary[0],
-            balance: summary[1],
-            requestCount: summary[2],
-            approversCount: summary[3],
-            manager: summary[4]
+            minimumContribution: BigInt(summary[0]).toString(),
+            balance: BigInt(summary[1]).toString(),
+            requestCount: BigInt(summary[2]).toString(),
+            approversCount: BigInt(summary[3]).toString(),
+            manager: BigInt(summary[4]).toString()
 
         };
     }
