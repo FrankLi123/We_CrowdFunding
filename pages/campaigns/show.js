@@ -3,6 +3,8 @@ import Layout from '../../components/Layout';
 import Campaign from '../../ethereum/campaign';
 import { Card, Button, Form, Input, Message} from 'semantic-ui-react';
 import web3 from '../../ethereum/web3';
+import ContributeForm from '../../components/ContributeForm';
+
 class CampaignShow extends Component {
 
     //before compoenent rendered to the screen, run this
@@ -72,6 +74,7 @@ class CampaignShow extends Component {
         return (
             <Layout>
                 {this.renderCardLists()}
+                <ContributeForm/>
             </Layout>
         )
         //    <Card.Group items={items}/>
