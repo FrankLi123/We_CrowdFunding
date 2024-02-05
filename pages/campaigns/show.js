@@ -39,7 +39,9 @@ class CampaignShow extends Component {
             {
                 header : manager,
                 meta: "Address of Manager",
-                description: 'Manager created this campaign and can create request to withdraw money'
+                description: 'Manager created this campaign and can create request to withdraw money',
+                style: {overflowWrap: 'break-word'}
+
             }
         ];
         return  <Card.Group items={items}/>;
