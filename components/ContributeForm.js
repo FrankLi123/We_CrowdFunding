@@ -7,7 +7,9 @@ import { Router } from 'next/router';
 class ContributeForm extends Component {
     
     state = {
-        value: ''
+        value: '',
+        errorMessage: '',
+        loading: false
     };
     
 
@@ -17,6 +19,8 @@ class ContributeForm extends Component {
         
         // this.setState({loading: true, errorMessage: ''});
         const campaign = Campaign(this.props.address);
+
+        this.setState({loading: true, errorMessage: ''});
 
         try{
             const accounts = await web3.eth.getAccounts();
@@ -30,10 +34,10 @@ class ContributeForm extends Component {
             Router.replaceRoute(`/campaigns/${this.props.address}`)
 
         }catch(err){
-            // this.setState({errorMessage: err.message});
+            this.setState({errorMessage: err.message});
         }
 
-        // this.setState({loading: false});
+        this.setState({loading: false});
     };
         
 
@@ -41,7 +45,7 @@ class ContributeForm extends Component {
 
         return(
 
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={this.onSubmit} error={this.state.errorMessage}>
             <Form.Field>
                 <label> Amount to Contribute this time: </label>
                 <Input label="ether" labelPosition="right"
@@ -49,7 +53,8 @@ class ContributeForm extends Component {
                 onChange={event => this.setState({value: event.target.value})}
                 />
             </Form.Field>
-            <Button primary>
+            <Message error header="Opps" content={this.state.errorMessage} />
+            <Button loading={this.state.loading} primary>
                 Contribute !
             </Button>
             </Form>
