@@ -44,7 +44,7 @@ class RequestNew extends Component {
         return (
 
             <Layout>
-            <Form>
+            <Form onSubmit={this.onSubmit}>
                 <Form.Field>
                     <label> Description</label>
                     <Input 
