@@ -14,8 +14,30 @@ class RequestNew extends Component {
 
     static async getInitialProps(props){
         const {address} = props.query;
-        
+
         return {address};
+    }
+
+
+    onSubmit = async event =>{
+        event.preventDefault();
+
+        const campaign = Campaign(this.props.address);
+        const { description, value, recipient } = this.state;
+
+        try{
+
+            // create a new request using the contract function
+            const accounts = await web3.eth.getAccounts();
+            await campaign.methods.createRequest(
+                web3.utils.toWei(value, 'ether'), 
+                description, 
+                recipient
+            ).send({from: accounts[0]});
+
+        }catch{
+
+        }
     }
 
     render() {
