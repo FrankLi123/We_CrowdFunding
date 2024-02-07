@@ -3,13 +3,16 @@ import { Card, Button, Form, Input, Message, Grid} from 'semantic-ui-react';
 import Campaign from '../../../ethereum/campaign';
 import web3 from '../../../ethereum/web3';
 import Layout from '../../../components/Layout';
+import {Link} from '../../../routes';
 class RequestNew extends Component {
 
 
     state = {
         description: '',
         value: '',
-        recipient: ''
+        recipient: '',
+        loading:  false,
+        errorMessage: ''
     };
 
     static async getInitialProps(props){
@@ -48,6 +51,11 @@ class RequestNew extends Component {
         return (
 
             <Layout>
+                <Link route={`/campaigns/${this.props.address}/requests`}>
+                    <a>
+                    <Button primary> Back </Button>
+                    </a>
+                </Link>
                 <h3> Create a New Request </h3>
             <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
