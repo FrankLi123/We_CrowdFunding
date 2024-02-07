@@ -31,8 +31,14 @@ class RequestIndex extends Component {
     // function to render requests into rows
     renderRow(){
         return this.props.requests.map((request, index) =>{
-            return <RequestRow key={index} request={request} address={this.props.address}/>
-        })
+            return(
+            <RequestRow
+            id={index} 
+            key={index} 
+            request={request} 
+            address={this.props.address}/>
+            );
+        });
     }
 
 
@@ -65,7 +71,7 @@ class RequestIndex extends Component {
                     <Body>
                         {this.renderRow()}
                     </Body>
-                    
+
                 </Table>
 
             </Layout>
