@@ -21,13 +21,15 @@ class RequestNew extends Component {
 
     onSubmit = async event =>{
         event.preventDefault();
+        
+        this.setState({loading: true, errorMessage: ''});
 
         const campaign = Campaign(this.props.address);
         const { description, value, recipient } = this.state;
 
         try{
 
-            // create a new request using the contract function
+        // create a new request using the contract function
             const accounts = await web3.eth.getAccounts();
             await campaign.methods.createRequest(
                 web3.utils.toWei(value, 'ether'), 
@@ -35,16 +37,19 @@ class RequestNew extends Component {
                 recipient
             ).send({from: accounts[0]});
 
-        }catch{
-
+        }catch(err){
+            this.setState({errorMessage: err.message});
         }
+
+        this.setState({loading: false});
     }
 
     render() {
         return (
 
             <Layout>
-            <Form onSubmit={this.onSubmit}>
+                <h3> Create a New Request </h3>
+            <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
                     <label> Description</label>
                     <Input 
@@ -54,7 +59,7 @@ class RequestNew extends Component {
                     />
                 </Form.Field>
                 <Form.Field>
-                    <label> Value (Ether) </label>
+                    <label> Value (In Ether) </label>
                     <Input 
                     value={this.state.value}
                     onChange ={event =>
@@ -69,7 +74,12 @@ class RequestNew extends Component {
                     this.setState({recipient: event.target.value})}
                     />
                 </Form.Field>
-                <Button primary> Create !</Button>
+                <Message
+                    error
+                    header="Oops, error occured! "
+                    content={this.state.errorMessage}
+                />
+                <Button  loading={this.state.loading} primary> Create !</Button>
             </Form>
             </Layout>
         )
