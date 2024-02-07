@@ -8,15 +8,16 @@ class RequestRow extends Component {
     render(){
 
         const {Row, Cell} = Table;
-        // const {id, request} = this.props;
+        const {id, request, approversCount} = this.props;
         return(
 
             <Row>
-
                 <Cell>{this.props.id}</Cell>
-                <Cell>{this.props.request.description}</Cell>
-                <Cell>{web3.utils.fromWei(this.props.request.value, 'ether')}</Cell>
-                <Cell>{this.props.request.recipient}</Cell>
+                <Cell>{request.description}</Cell>
+                <Cell>{web3.utils.fromWei(request.value, 'ether')}</Cell>
+                <Cell>{request.recipient}</Cell>
+                <Cell>{parseInt(request.approvalCount)} / {parseInt(approversCount)}</Cell>
+              
             </Row>
         )
     }

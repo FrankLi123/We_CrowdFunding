@@ -16,16 +16,22 @@ class RequestIndex extends Component {
         // get the count number of requests
         const requestCount = await campaign.methods.getRequestsCount().call();
 
+        // get the total number of approvers
+        const approversCount = await campaign.methods.approversCount().call();
+
         // get the request array as a struct using JS
         const requests = await Promise.all(
-            Array(parseInt(requestCount)).fill().map((element, index) =>{
+            Array(requestCount).fill().map((element, index) =>{
                 return campaign.methods.requests(index).call();
             })
         );
 
         console.log(requests);
 
-        return {address, requests};
+        // console.log("##$");
+        // console.log(requests[0].approvalCount);
+        // add to the props
+        return {address, requests, requestCount, approversCount };
     }
 
     // function to render requests into rows
@@ -36,7 +42,9 @@ class RequestIndex extends Component {
             id={index} 
             key={index} 
             request={request} 
-            address={this.props.address}/>
+            address={this.props.address}
+            approversCount={this.props.approversCount}
+            />
             );
         });
     }
