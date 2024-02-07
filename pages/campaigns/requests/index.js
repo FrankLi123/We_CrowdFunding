@@ -5,7 +5,7 @@ import Layout from '../../../components/Layout';
 import {Link} from '../../../routes';
 import { Card, Button, Table} from 'semantic-ui-react';
 import Campaign from '../../../ethereum/campaign';
-
+import RequestRow from '../../../components/RequestRow';
 
 class RequestIndex extends Component {
 
@@ -27,6 +27,15 @@ class RequestIndex extends Component {
 
         return {address, requests};
     }
+
+    // function to render requests into rows
+    renderRow(){
+        return this.props.requests.map((request, index) =>{
+            return <RequestRow key={index} request={request} address={this.props.address}/>
+        })
+    }
+
+
     render(){
 
         const {Header, Row, HeaderCell, Body } = Table;
