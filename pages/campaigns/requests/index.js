@@ -61,6 +61,11 @@ class RequestIndex extends Component {
                             <HeaderCell> Finalize </HeaderCell>
                         </Row>
                     </Header>
+
+                    <Body>
+                        {this.renderRow()}
+                    </Body>
+                    
                 </Table>
 
             </Layout>
