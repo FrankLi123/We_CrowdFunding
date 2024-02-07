@@ -18,7 +18,7 @@ class RequestIndex extends Component {
 
         // get the request array as a struct using JS
         const requests = await Promise.all(
-            Array(requestCount).fill().map((element, index) =>{
+            Array(parseInt(requestCount)).fill().map((element, index) =>{
                 return campaign.methods.requests(index).call();
             })
         );
